@@ -1,2 +1,3 @@
 from .category import Category
-from .job import Job
+from .job_posting import JobPosting
+from .applicant import Applicant

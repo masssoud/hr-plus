@@ -1,0 +1,1 @@
+from jobs.views.category import CategoryViewSet

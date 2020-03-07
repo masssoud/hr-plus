@@ -3,7 +3,7 @@ from django.db import models
 
 class JobPosting(models.Model):
     title = models.CharField(max_length=200)
-    category = models.ForeignKey('Category', null=True, on_delete=models.SET_NULL)
+    category = models.ForeignKey('Category', blank=False, null=True, on_delete=models.SET_NULL)
     is_open = models.BooleanField(default=True, db_index=True)
     description = models.TextField(default="", blank=True)
     qualifications = models.TextField(default="", blank=True)

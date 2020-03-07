@@ -4,6 +4,7 @@ from jobs import views
 
 router = routers.DefaultRouter()
 router.register(r'categories', views.CategoryViewSet)
+router.register(r'job-postings', views.JobPostingViewSet)
 
 from . import views
 

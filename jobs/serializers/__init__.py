@@ -1,1 +1,2 @@
-from jobs.serializers.category import CategorySerializer
+from jobs.serializers.category import CategoryDetailSerializer, CategoryListSerializer
+from jobs.serializers.job_posting import JobPostingDetailSerializer, JobPostingListSerializer

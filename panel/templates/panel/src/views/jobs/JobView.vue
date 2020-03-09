@@ -13,6 +13,10 @@
                     </div>
                     <div class="uk-width-auto">
                         <router-link class="uk-button uk-button-default"
+                                     :to="{name: 'applicants', query:{jobPosting: item.id}}">
+                            متقاضیان
+                        </router-link>
+                        <router-link class="uk-button uk-button-default"
                                      :to="{name: 'edit-job', params:{id: item.id}}">
                             ویرایش
                         </router-link>
@@ -36,6 +40,9 @@
                     <hr>
                     <dt>صلاحیت‌ها</dt>
                     <dd v-html="item.qualifications"></dd>
+                    <hr>
+                    <dt>موارد مورد نیاز</dt>
+                    <dd v-html="item.requirements"></dd>
                     <hr>
                     <dt>مواردی که داشتن آنها خوب است</dt>
                     <dd v-html="item.good_to_have"></dd>
@@ -73,6 +80,7 @@
                     description: null,
                     is_open: null,
                     qualifications: null,
+                    requirements: null,
                     good_to_have: null,
                     benefits: null,
                     created_at: null,

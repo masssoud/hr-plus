@@ -19,7 +19,8 @@ export default new Vuex.Store({
             email: localStorage.getItem('email'),
         },
         errors: {},
-        errorMessage: ''
+        errorMessage: '',
+        applicationStatuses: [],
     },
     mutations: {
         setIsAuthenticated(state, payload) {
@@ -38,6 +39,9 @@ export default new Vuex.Store({
         },
         setRefreshingCall(state, payload) {
             state.refreshingCall = payload;
+        },
+        setApplicationStatuses(state, payload) {
+            state.applicationStatuses = payload;
         },
         setToken(state, payload) {
             localStorage.setItem('authtoken', payload.access);
@@ -98,6 +102,14 @@ export default new Vuex.Store({
             try {
                 const user = await AXIOS.get(`users/users/current-user/`);
                 commit('setUser', user.data);
+            } catch (e) {
+                commit('setErrors', e.response.data);
+            }
+        },
+        async getApplicationStatuses({commit}) {
+            try {
+                const statuses = await AXIOS.get(`jobs/applicants/statuses/`);
+                commit('setApplicationStatuses', statuses.data);
             } catch (e) {
                 commit('setErrors', e.response.data);
             }

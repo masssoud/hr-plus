@@ -68,12 +68,28 @@
 
 <script>
     import Header from '../components/Header';
+    import {mapState} from 'vuex';
 
     export default {
         name: 'Dashboard',
         components: {
             Header,
         },
+        computed: {
+            ...mapState(['errors', 'errorMessage'])
+        },
+        mounted: function () {
+            this.$nextTick(async () => {
+                await this.getSharedData();
+            });
+        },
+        methods: {
+            getSharedData() {
+                if (!this.invalid) {
+                    this.$store.dispatch('getApplicationStatuses');
+                }
+            }
+        }
     };
 </script>
 

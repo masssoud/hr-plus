@@ -1,2 +1,3 @@
-from jobs.views.category import CategoryViewSet
-from jobs.views.job_posting import JobPostingViewSet
+from .category import CategoryViewSet
+from .job_posting import JobPostingViewSet
+from .applicant import ApplicantViewSet

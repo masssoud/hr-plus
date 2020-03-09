@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import vueDebounce from 'vue-debounce'
 import App from './App.vue'
 import router from './router';
 import store from './store';
@@ -8,6 +9,7 @@ import fa from 'vee-validate/dist/locale/fa.json';
 Vue.config.productionTip = false;
 Vue.component('ValidationProvider', ValidationProvider);
 Vue.component('ValidationObserver', ValidationObserver);
+Vue.use(vueDebounce);
 localize('fa', fa);
 
 new Vue({

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-07 14:44+0000\n"
+"POT-Creation-Date: 2020-03-09 18:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,34 +17,42 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: jobs/models/applicant.py:9
-msgid "Applied"
-msgstr ""
-
 #: jobs/models/applicant.py:10
-msgid "Under Evaluation"
-msgstr ""
+msgid "Applied"
+msgstr "اپلای شده"
 
 #: jobs/models/applicant.py:11
-msgid "Accepted for First Interview"
-msgstr ""
+msgid "Under Evaluation"
+msgstr "در دست بررسی"
 
 #: jobs/models/applicant.py:12
-msgid "Accepted for Second Interview"
-msgstr ""
+msgid "Accepted for First Interview"
+msgstr "قبول شده برای مصاحبه اول"
 
 #: jobs/models/applicant.py:13
-msgid "Accepted for Third Interview"
-msgstr ""
+msgid "Accepted for Second Interview"
+msgstr "قبول شده برای مصاحبه دوم"
 
 #: jobs/models/applicant.py:14
-msgid "Rejected"
-msgstr ""
+msgid "Accepted for Third Interview"
+msgstr "قبول شده برای مصاحبه سوم"
 
 #: jobs/models/applicant.py:15
-msgid "Offer"
-msgstr ""
+msgid "Rejected"
+msgstr "رد شده"
 
 #: jobs/models/applicant.py:16
+msgid "Offer"
+msgstr "پیشنهاد ارسال شده"
+
+#: jobs/models/applicant.py:17
 msgid "Canceled"
-msgstr ""
+msgstr "کنسل شده"
+
+#: jobs/validators/mobile_validator.py:6
+msgid "Phone number must be entered in the format: '09112222222'."
+msgstr "شماره تلقن باید بصورت '09112222222' باشد."
+
+#: jobs/validators/pdf_validator.py:11
+msgid "The file is not a valid PDF file."
+msgstr "این فایل یک فایل PDF معتبر نمی‌باشد."

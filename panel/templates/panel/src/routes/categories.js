@@ -9,16 +9,18 @@ export default [
         path: 'categories/create',
         name: 'create-category',
         component: () =>
-            import(/* webpackChunkName: "categories" */ '../views/categories/CreateCategory.vue'),
+            import(/* webpackChunkName: "create-category" */ '../views/categories/CreateCategory.vue'),
     },
     {
         path: 'categories/:id',
         name: 'view-category',
-        component: () => import('../views/categories/CategoryView.vue')
+        component: () =>
+            import(/* webpackChunkName: "view-category" */ '../views/categories/CategoryView.vue')
     },
     {
         path: 'categories/:id/edit',
         name: 'edit-category',
-        component: () => import('../views/categories/EditCategory.vue')
+        component: () =>
+            import(/* webpackChunkName: "edit-category" */ '../views/categories/EditCategory.vue')
     },
 ]

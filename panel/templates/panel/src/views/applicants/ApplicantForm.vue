@@ -3,19 +3,19 @@
         <form @submit.prevent="ownOnSubmit" class="uk-form-stacked">
             <fieldset class="uk-fieldset">
                 <div class="uk-margin">
-                    <ValidationProvider name="عنوان" vid="title" rules="required"
+                    <ValidationProvider name="نام و نام خانوادگی" vid="full_name" rules="required"
                                         v-slot="{ errors }">
                         <label
                                 class="uk-form-label"
                                 v-bind:class="{ 'uk-text-danger': (errors.length>0) }"
                         >
-                            عنوان
+                            نام و نام خانوادگی
                         </label>
                         <div class="uk-form-controls">
-                            <input v-model="title"
+                            <input v-model="full_name"
                                    class="uk-input"
                                    v-bind:class="{ 'uk-form-danger': (errors.length>0) }"
-                                   type="text" placeholder="عنوان">
+                                   type="text" placeholder="نام و نام خانوادگی">
                         </div>
                         <div v-if="errors.length>0">
                             <div class="uk-text-danger" v-for="(error, index) in errors" :key="index">
@@ -25,21 +25,87 @@
                     </ValidationProvider>
                 </div>
                 <div class="uk-margin">
-                    <ValidationProvider name="دسته‌بندی" vid="category_id" rules="required"
+                    <ValidationProvider name="آدرس ایمیل" vid="email" rules="required"
                                         v-slot="{ errors }">
                         <label
                                 class="uk-form-label"
                                 v-bind:class="{ 'uk-text-danger': (errors.length>0) }"
                         >
-                            دسته‌بندی
+                            آدرس ایمیل
                         </label>
                         <div class="uk-form-controls">
-                            <select v-model="category_id" class="uk-select">
-                                <option v-for="category in categories" :key="`category-${category.id}`"
-                                        :value="category.id">
-                                    {{category.title}}
-                                </option>
-                            </select>
+                            <input v-model="email"
+                                   class="uk-input"
+                                   v-bind:class="{ 'uk-form-danger': (errors.length>0) }"
+                                   type="text" placeholder="آدرس ایمیل">
+                        </div>
+                        <div v-if="errors.length>0">
+                            <div class="uk-text-danger" v-for="(error, index) in errors" :key="index">
+                                {{ error }}
+                            </div>
+                        </div>
+                    </ValidationProvider>
+                </div>
+                <div class="uk-margin">
+                    <ValidationProvider name="شماره موبایل" vid="mobile" rules="required"
+                                        v-slot="{ errors }">
+                        <label
+                                class="uk-form-label"
+                                v-bind:class="{ 'uk-text-danger': (errors.length>0) }"
+                        >
+                            شماره موبایل
+                        </label>
+                        <div class="uk-form-controls">
+                            <input v-model="mobile"
+                                   class="uk-input"
+                                   v-bind:class="{ 'uk-form-danger': (errors.length>0) }"
+                                   type="text" placeholder="شماره موبایل">
+                        </div>
+                        <div v-if="errors.length>0">
+                            <div class="uk-text-danger" v-for="(error, index) in errors" :key="index">
+                                {{ error }}
+                            </div>
+                        </div>
+                    </ValidationProvider>
+                </div>
+                <div class="uk-margin">
+                    <ValidationProvider name="تصویر" vid="picture" rules=""
+                                        v-slot="{ errors }">
+                        <label
+                                class="uk-form-label"
+                                v-bind:class="{ 'uk-text-danger': (errors.length>0) }"
+                        >
+                            تصویر
+                        </label>
+                        <div uk-form-custom>
+                            <input type="file" @change="onPictureChange">
+                            <button class="uk-button uk-button-default" type="button" tabindex="-1">تصویر</button>
+                        </div>
+                        <div class="uk-margin-top" v-if="id && picture">
+                            <img :src="picture" width="200">
+                        </div>
+                        <div v-if="errors.length>0">
+                            <div class="uk-text-danger" v-for="(error, index) in errors" :key="index">
+                                {{ error }}
+                            </div>
+                        </div>
+                    </ValidationProvider>
+                </div>
+                <div class="uk-margin">
+                    <ValidationProvider name="رزومه" vid="cv" rules="required"
+                                        v-slot="{ errors }">
+                        <label
+                                class="uk-form-label"
+                                v-bind:class="{ 'uk-text-danger': (errors.length>0) }"
+                        >
+                            رزومه
+                        </label>
+                        <div uk-form-custom>
+                            <input type="file" @change="onCVChange">
+                            <button class="uk-button uk-button-default" type="button" tabindex="-1">رزومه</button>
+                        </div>
+                        <div class="uk-margin-top" v-if="id && cv">
+                            <a :href="cv" target="_blank" class="uk-button uk-button-default">مشاهده رزومه</a>
                         </div>
                         <div v-if="errors.length>0">
                             <div class="uk-text-danger" v-for="(error, index) in errors" :key="index">
@@ -70,102 +136,44 @@
                     </ValidationProvider>
                 </div>
                 <div class="uk-margin">
-                    <ValidationProvider name="صلاحیت‌ها" vid="qualifications"
+                    <ValidationProvider name="موقعیت شغلی" vid="job_posting" rules="required"
                                         v-slot="{ errors }">
                         <label
                                 class="uk-form-label"
                                 v-bind:class="{ 'uk-text-danger': (errors.length>0) }"
                         >
-                            صلاحیت‌ها
-                        </label>
-                        <textarea v-model="qualifications"
-                                  class="uk-textarea"
-                                  v-bind:class="{ 'uk-form-danger': (errors.length>0) }"
-                                  rows="5"
-                                  placeholder="صلاحیت‌ها"></textarea>
-                        <div v-if="errors.length>0">
-                            <div class="uk-text-danger" v-for="(error, index) in errors" :key="index">
-                                {{ error }}
-                            </div>
-                        </div>
-                    </ValidationProvider>
-                </div>
-                <div class="uk-margin">
-                    <ValidationProvider name="موارد مورد نیاز" vid="requirements"
-                                        v-slot="{ errors }">
-                        <label
-                                class="uk-form-label"
-                                v-bind:class="{ 'uk-text-danger': (errors.length>0) }"
-                        >
-                            موارد مورد نیاز
-                        </label>
-                        <textarea v-model="requirements"
-                                  class="uk-textarea"
-                                  v-bind:class="{ 'uk-form-danger': (errors.length>0) }"
-                                  rows="5"
-                                  placeholder="موارد مورد نیاز"></textarea>
-                        <div v-if="errors.length>0">
-                            <div class="uk-text-danger" v-for="(error, index) in errors" :key="index">
-                                {{ error }}
-                            </div>
-                        </div>
-                    </ValidationProvider>
-                </div>
-                <div class="uk-margin">
-                    <ValidationProvider name="مواردی که داشتن آنها خوب است" vid="good_to_have"
-                                        v-slot="{ errors }">
-                        <label
-                                class="uk-form-label"
-                                v-bind:class="{ 'uk-text-danger': (errors.length>0) }"
-                        >
-                            مواردی که داشتن آنها خوب است
-                        </label>
-                        <textarea v-model="good_to_have"
-                                  class="uk-textarea"
-                                  v-bind:class="{ 'uk-form-danger': (errors.length>0) }"
-                                  rows="5"
-                                  placeholder="مواردی که داشتن آنها خوب است"></textarea>
-                        <div v-if="errors.length>0">
-                            <div class="uk-text-danger" v-for="(error, index) in errors" :key="index">
-                                {{ error }}
-                            </div>
-                        </div>
-                    </ValidationProvider>
-                </div>
-                <div class="uk-margin">
-                    <ValidationProvider name="مزایا" vid="benefits"
-                                        v-slot="{ errors }">
-                        <label
-                                class="uk-form-label"
-                                v-bind:class="{ 'uk-text-danger': (errors.length>0) }"
-                        >
-                            مزایا
-                        </label>
-                        <textarea v-model="benefits"
-                                  class="uk-textarea"
-                                  v-bind:class="{ 'uk-form-danger': (errors.length>0) }"
-                                  rows="5"
-                                  placeholder="مزایا"></textarea>
-                        <div v-if="errors.length>0">
-                            <div class="uk-text-danger" v-for="(error, index) in errors" :key="index">
-                                {{ error }}
-                            </div>
-                        </div>
-                    </ValidationProvider>
-                </div>
-                <div class="uk-margin">
-                    <ValidationProvider name="آیا موقعیت باز است؟" vid="is_open" rules="required"
-                                        v-slot="{ errors }">
-                        <label
-                                class="uk-form-label"
-                                v-bind:class="{ 'uk-text-danger': (errors.length>0) }"
-                        >
-                            آیا موقعیت باز است؟
+                            موقعیت شغلی
                         </label>
                         <div class="uk-form-controls">
-                            <select v-model="is_open" class="uk-select">
-                                <option value="1">بله</option>
-                                <option value="0">خیر</option>
+                            <select v-model="job_posting" class="uk-select">
+                                <option v-for="job in jobs" :key="`job-posting-${job.id}`"
+                                        :value="job.id">
+                                    {{job.title}}
+                                </option>
+                            </select>
+                        </div>
+                        <div v-if="errors.length>0">
+                            <div class="uk-text-danger" v-for="(error, index) in errors" :key="index">
+                                {{ error }}
+                            </div>
+                        </div>
+                    </ValidationProvider>
+                </div>
+                <div class="uk-margin" v-if="id">
+                    <ValidationProvider name="وضعیت" vid="status" rules="required"
+                                        v-slot="{ errors }">
+                        <label
+                                class="uk-form-label"
+                                v-bind:class="{ 'uk-text-danger': (errors.length>0) }"
+                        >
+                            وضعیت
+                        </label>
+                        <div class="uk-form-controls">
+                            <select v-model="status" class="uk-select">
+                                <option v-for="(status, key) in applicationStatuses" :key="`status-${key}`"
+                                        :value="key">
+                                    {{status}}
+                                </option>
                             </select>
                         </div>
                         <div v-if="errors.length>0">
@@ -188,6 +196,7 @@
 <script>
     import {extend} from 'vee-validate';
     import UIKit from 'uikit';
+    import {mapState} from 'vuex';
     import AXIOS from '../../common/http-common';
 
     extend('required', {
@@ -201,36 +210,64 @@
     });
 
     export default {
-        name: "JobForm",
+        name: "ApplicantForm",
         props: ['info', 'onSubmit'],
         data: function () {
             return {
-                title: this.info.title ?? '',
+                id: this.info.id ?? '',
+                cv: this.info.cv ?? null,
+                cvData: null,
+                job_posting: this.info.job_posting ?? '',
+                full_name: this.info.full_name ?? '',
+                email: this.info.email ?? '',
+                mobile: this.info.mobile ?? '',
                 description: this.info.description ?? '',
-                is_open: (this.info.is_open) ? '1' : '0',
-                qualifications: this.info.qualifications ?? '',
-                requirements: this.info.requirements ?? '',
-                good_to_have: this.info.good_to_have ?? '',
-                benefits: this.info.benefits ?? '',
-                category_id: this.info.category_id ?? '',
-                categories: [],
+                status: this.info.status ?? '',
+                picture: this.info.picture ?? null,
+                pictureData: null,
+                jobs: [],
             }
         },
         watch: {
             async $route() {
-                await this.getCategories();
+                await this.getJobs();
             }
         },
         mounted: function () {
             this.$nextTick(async () => {
-                await this.getCategories();
+                await this.getJobs();
             });
         },
+        computed: {
+            ...mapState(['applicationStatuses', 'errors', 'errorMessage'])
+        },
         methods: {
-            async getCategories() {
+            onPictureChange(e) {
+                const files = e.target.files || e.dataTransfer.files;
+                if (files.length > 0) {
+                    this.pictureData = files[0];
+                }
+                if (this.pictureData) {
+                    this.$refs.form.setErrors({
+                        picture: []
+                    });
+                }
+            },
+            onCVChange(e) {
+                const files = e.target.files || e.dataTransfer.files;
+                if (files.length > 0) {
+                    this.cvData = files[0];
+                }
+                if (this.cvData) {
+                    this.$refs.form.setErrors({
+                        cv: []
+                    });
+                }
+            },
+            async getJobs() {
                 try {
-                    const {data} = await AXIOS.get('jobs/categories/all/');
-                    this.categories = data;
+                    const {data} = await AXIOS.get(`jobs/job-postings/all`);
+                    this.jobs = data;
                 } catch (e) {
                     const error = e.response.data;
                     if (error.detail) {
@@ -241,18 +278,18 @@
             async ownOnSubmit() {
                 const formData = {
                     invalid: this.invalid,
-                    title: this.title,
+                    cv: this.cvData,
+                    job_posting: this.job_posting,
+                    full_name: this.full_name,
+                    email: this.email,
+                    mobile: this.mobile,
                     description: this.description,
-                    is_open: this.is_open === '1',
-                    requirements: this.requirements,
-                    qualifications: this.qualifications,
-                    good_to_have: this.good_to_have,
-                    benefits: this.benefits,
-                    category: this.category_id,
+                    status: this.status,
+                    picture: this.pictureData,
                 };
                 try {
                     const response = await this.onSubmit(formData);
-                    this.$router.push({name: 'view-job', params: {id: response.id}});
+                    this.$router.push({name: 'view-applicant', params: {id: response.id}});
                 } catch (e) {
                     const error = e.response.data;
                     if (error.detail) {

@@ -2,9 +2,9 @@
     <div v-if="item.id">
         <Breadcrumbs :items="[
             {to: {name: 'panel'}, label: 'داشبورد'},
-            {to: {name: 'jobs'}, label: 'موقعیت‌های شغلی'},
-            {to: {name: 'view-job', params:{id: item.id}}, label: item.title},
-            {to: {name: 'edit-job', params:{id: item.id}}, label: 'ویرایش'},
+            {to: {name: 'applicants'}, label: 'متقاضیان'},
+            {to: {name: 'view-applicant', params:{id: item.id}}, label: item.full_name},
+            {to: {name: 'edit-applicant', params:{id: item.id}}, label: 'ویرایش'},
         ]"></Breadcrumbs>
         <div class="uk-card uk-card-default uk-width-1-1">
             <div class="uk-card-header">
@@ -15,10 +15,10 @@
                 </div>
             </div>
             <div class="uk-card-body">
-                <JobForm
+                <ApplicantForm
                         :info="item"
                         :onSubmit="onSubmit"
-                ></JobForm>
+                ></ApplicantForm>
             </div>
         </div>
     </div>
@@ -28,46 +28,44 @@
     import AXIOS from '../../common/http-common';
     import Breadcrumbs from "../../components/Breadcrumbs";
     import UIKit from "uikit";
-    import JobForm from "./JobForm";
+    import ApplicantForm from "./ApplicantForm";
 
     export default {
-        name: 'EditJob',
+        name: 'EditApplicant',
         data: function () {
             return {
                 item: {
-                    id: null,
-                    title: null,
-                    description: null,
-                    requirements: null,
-                    is_open: null,
-                    qualifications: null,
-                    good_to_have: null,
-                    benefits: null,
-                    created_at: null,
-                    updated_at: null,
-                    category: null,
+                    id: '',
+                    cv: null,
+                    job_posting: '',
+                    full_name: '',
+                    email: '',
+                    mobile: '',
+                    description: '',
+                    status: '',
+                    picture: null,
                 },
             };
         },
         components: {
             Breadcrumbs,
-            JobForm
+            ApplicantForm
         },
         watch: {
             async $route() {
-                await this.getPost();
+                await this.getApplicant();
             }
         },
         mounted: function () {
             this.$nextTick(async () => {
-                await this.getPost();
+                await this.getApplicant();
             });
         },
         methods: {
-            async getPost() {
+            async getApplicant() {
                 try {
                     const id = parseInt((this.$route.params.id) ? this.$route.params.id : 0, 10);
-                    const {data} = await AXIOS.get(`jobs/job-postings/${id}/`);
+                    const {data} = await AXIOS.get(`jobs/applicants/${id}/`);
                     this.item = data;
                     this.item.category_id = data.category;
                 } catch (e) {
@@ -80,17 +78,19 @@
             async onSubmit(data) {
                 if (!data.invalid) {
                     try {
-                        const response = await AXIOS.put(`jobs/job-postings/${this.item.id}/`,
-                            {
-                                title: data.title,
-                                description: data.description,
-                                is_open: data.is_open,
-                                qualifications: data.qualifications,
-                                requirements: data.requirements,
-                                good_to_have: data.good_to_have,
-                                benefits: data.benefits,
-                                category: data.category,
-                            });
+                        const formData = new FormData();
+                        formData.append('full_name', data.full_name);
+                        if (data.cv) {
+                            formData.append('cv', data.cv);
+                        }
+                        formData.append('job_posting', data.job_posting);
+                        formData.append('email', data.email);
+                        formData.append('mobile', data.mobile);
+                        if (data.picture) {
+                            formData.append('picture', data.picture);
+                        }
+                        formData.append('status', data.status);
+                        const response = await AXIOS.patch(`jobs/applicants/${this.item.id}/`, formData);
                         return response.data;
                     } catch (e) {
                         return Promise.reject(e);

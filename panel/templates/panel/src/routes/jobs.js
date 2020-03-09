@@ -9,16 +9,18 @@ export default [
         path: 'jobs/create',
         name: 'create-job',
         component: () =>
-            import(/* webpackChunkName: "jobs" */ '../views/jobs/CreateJob.vue'),
+            import(/* webpackChunkName: "create-job" */ '../views/jobs/CreateJob.vue'),
     },
     {
         path: 'jobs/:id',
         name: 'view-job',
-        component: () => import('../views/jobs/JobView.vue')
+        component: () =>
+            import(/* webpackChunkName: "view-job" */ '../views/jobs/JobView.vue')
     },
     {
         path: 'jobs/:id/edit',
         name: 'edit-job',
-        component: () => import('../views/jobs/EditJob.vue')
+        component: () =>
+            import(/* webpackChunkName: "edit-job" */ '../views/jobs/EditJob.vue')
     },
 ]

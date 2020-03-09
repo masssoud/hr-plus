@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
 import store from './store';
-import {categories, jobs, users, profile} from './routes/index.js';
+import {categories, jobs, users, profile, applicants} from './routes/index.js';
 
 Vue.use(Router);
 
@@ -37,6 +37,7 @@ const router = new Router({
                 ...jobs,
                 ...users,
                 ...profile,
+                ...applicants,
             ],
             meta: {
                 authRequired: true

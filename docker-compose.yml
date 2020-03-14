@@ -6,12 +6,27 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code
-    ports:
-      - "8888:8000"
+#    ports:
+#      - "8888:8000"
+    expose:
+      - 8000
     networks:
       - hrplus-network
     depends_on:
       - postgres
+
+  nginx:
+    image: nginx
+    container_name: hr_plus_webserver
+    ports:
+      - '8888:80'
+    depends_on:
+      - app
+    volumes:
+      - './docker-compose/nginx/site.conf:/etc/nginx/conf.d/default.conf'
+      - '.:/code'
+    networks:
+      - hrplus-network
 
   postgres:
     image: postgres

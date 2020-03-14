@@ -8,7 +8,7 @@ from rest_framework.response import Response
 
 class ApplicantViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows categories to be viewed or edited.
+    API endpoint that allows applicants to be viewed or edited.
     """
     queryset = Applicant.objects.all().order_by('-created_at')
 

@@ -43,8 +43,19 @@ services:
     volumes:
       - "hrplus_postgres:/var/lib/postgresql/data"
 
+  redis:
+    image: redis:5.0.6-alpine
+    container_name: hr_plus_redis
+    volumes:
+      - 'hr_plus_redis:/data'
+    networks:
+      hrplus-network:
+        aliases:
+          - redis
+
 volumes:
   hrplus_postgres:
+  hr_plus_redis:
 
 networks:
   hrplus-network:

@@ -1,5 +1,6 @@
-from jobs.models import Applicant, ApplicantHistory
-from jobs.serializers import ApplicantListSerializer, ApplicantDetailSerializer, ApplicantHistorySerializer
+from jobs.models import Applicant, ApplicantHistory, Comment
+from jobs.serializers import ApplicantListSerializer, ApplicantDetailSerializer, ApplicantHistorySerializer, \
+    CommentSerializer
 from rest_framework import viewsets
 from rest_framework import permissions
 from rest_framework.decorators import action
@@ -48,7 +49,7 @@ class ApplicantViewSet(viewsets.ModelViewSet):
     @action(detail=True, methods=['get'])
     def history(self, request, pk=None):
         applicant = self.get_object()
-        history = ApplicantHistory.objects.filter(applicant__pk=applicant.id).order_by('-created_at')
+        history = ApplicantHistory.objects.all().filter(applicant__pk=applicant.id).order_by('-created_at')
         serializer = ApplicantHistorySerializer(history, many=True)
         return Response(serializer.data)
 
@@ -58,3 +59,15 @@ class ApplicantViewSet(viewsets.ModelViewSet):
         for (choice, label) in Applicant.ApplicantStatus.choices:
             statuses[choice] = label
         return Response(statuses)
+
+    @action(detail=True, methods=['get'])
+    def comments(self, request, pk=None):
+        applicant = self.get_object()
+        comments = Comment.objects.all().filter(applicant=applicant).order_by('-created_at')
+        page = self.paginate_queryset(comments)
+        if page is not None:
+            serializer = CommentSerializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = CommentSerializer(comments, many=True)
+        return Response(serializer.data)

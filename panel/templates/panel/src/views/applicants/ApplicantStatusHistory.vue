@@ -17,10 +17,6 @@
                                      :to="{name: 'edit-applicant', params:{id: item.id}}">
                             ویرایش
                         </router-link>
-                        <router-link class="uk-button uk-button-default"
-                                     :to="{name: 'applicant-status-history', params:{id: item.id}}">
-                            مشاهده تایم‌لاین تغییرات وضعیت
-                        </router-link>
                     </div>
                 </div>
             </div>

@@ -117,6 +117,7 @@
                 </div>
             </div>
             <div class="uk-width-1-4@m">
+                <h3>نظرات</h3>
                 <ValidationObserver ref="form" v-slot="{ invalid }">
                     <form @submit.prevent="submitComment" class="uk-margin-top">
                         <fieldset class="uk-fieldset">
@@ -126,6 +127,7 @@
                                                         v-slot="{ errors }">
                                                 <textarea v-model="comment"
                                                           class="uk-textarea"
+                                                          style="resize: none;"
                                                           v-bind:class="{ 'uk-form-danger': (errors.length>0) }"
                                                           rows="5"
                                                           placeholder="نظر"></textarea>
@@ -144,6 +146,28 @@
                         </fieldset>
                     </form>
                 </ValidationObserver>
+                <ul class="uk-comment-list uk-text-small uk-margin">
+                    <li class="uk-margin-small-top" v-for="comment in comments" :key="`comments-${comment.id}`">
+                        <article class="uk-comment">
+                            <header class="uk-comment-header uk-grid-medium uk-flex-middle" uk-grid>
+                                <div class="uk-width-expand">
+                                    <h4 class="uk-comment-title uk-margin-remove">{{ comment.user_full_name }}</h4>
+                                    <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
+                                        <li>
+                                            {{ humanReadable(comment.created_at) }}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </header>
+                            <div class="uk-comment-body">
+                                <p>{{ comment.body }}</p>
+                            </div>
+                        </article>
+                    </li>
+                </ul>
+                <a @click="getComments" v-if="moreComments" class="uk-button uk-button-default uk-width-1-1">
+                    بیشتر
+                </a>
             </div>
         </div>
     </div>
@@ -172,7 +196,11 @@
                     status: '',
                     picture: null,
                 },
+                comments: [],
                 comment: '',
+                moreComments: false,
+                commentsPage: 1,
+                commentsSocket: null,
             };
         },
         components: {
@@ -180,28 +208,70 @@
         },
         watch: {
             async $route() {
+                this.comments = [];
+                this.moreComments = false;
+                this.commentsPage = 1;
                 await this.getApplicant();
+                await this.getComments();
+                this.connectSocket();
             }
         },
         mounted: function () {
             this.$nextTick(async () => {
+                this.comments = [];
+                this.moreComments = false;
+                this.commentsPage = 1;
                 await this.getApplicant();
+                await this.getComments();
+                this.connectSocket();
+            });
+        },
+        destroyed: function () {
+            this.$nextTick(() => {
+                this.closeSocket()
             });
         },
         computed: {
             ...mapState(['applicationStatuses', 'errors', 'errorMessage'])
         },
         methods: {
+            closeSocket() {
+                this.commentsSocket.close();
+                this.commentsSocket = null;
+            },
+            connectSocket() {
+                if (this.commentsSocket !== null) {
+                    this.closeSocket();
+                }
+                this.commentsSocket = new WebSocket(`ws://localhost:8888/ws/comments/${this.item.id}/`);
+
+                this.commentsSocket.onopen = () => {
+                    // Connected
+                };
+
+                this.commentsSocket.onerror = (errorEvent) => {
+                    UIKit.notification(`<span uk-icon='icon: warning'></span>بروز خطا در کامنت‌ها`, {status: 'danger'});
+                    console.log('WebSocket ERROR: "' + JSON.stringify(errorEvent, null, 4));
+                };
+
+                this.commentsSocket.onmessage = (messageEvent) => {
+                    let {data} = messageEvent;
+                    data = JSON.parse(data);
+                    const {comment} = data;
+                    this.comments.unshift(comment);
+                };
+            },
             async submitComment() {
                 try {
                     const formData = new FormData();
                     formData.append('body', this.comment);
                     formData.append('applicant', this.item.id);
-                    await AXIOS.post(`jobs/comments/`, formData);
+                    const {data} = await AXIOS.post(`jobs/comments/`, formData);
                     this.comment = '';
                     this.$refs.form.setErrors({
                         comment: []
                     });
+                    this.sendCommentToWebSocket(data);
                 } catch (e) {
                     const error = e.response.data;
                     if (error.detail) {
@@ -212,6 +282,32 @@
                                 comment: error['body']
                             });
                         }
+                    }
+                }
+            },
+            sendCommentToWebSocket(comment) {
+                this.commentsSocket.send(JSON.stringify({
+                    comment
+                }));
+            },
+            async getComments() {
+                try {
+                    this.moreComments = false;
+                    const id = parseInt((this.$route.params.id) ? this.$route.params.id : 0, 10);
+                    const {data} = await AXIOS.get(`jobs/applicants/${id}/comments/?page=${this.commentsPage}`);
+                    if (data.results.length > 0) {
+                        data.results.forEach((element) => {
+                            this.comments.push(element);
+                        });
+                    }
+                    if (data.next !== null) {
+                        this.commentsPage++;
+                        this.moreComments = true;
+                    }
+                } catch (e) {
+                    const error = e.response.data;
+                    if (error.detail) {
+                        UIKit.notification(`<span uk-icon='icon: warning'></span>${error.detail}`, {status: 'danger'});
                     }
                 }
             },
@@ -234,6 +330,7 @@
                 UIKit.modal('#cv-modal').show();
             },
             gregorianToJalali: JalaliDateHelper.gregorianToJalali,
+            humanReadable: JalaliDateHelper.humanReadable,
         },
     };
 </script>

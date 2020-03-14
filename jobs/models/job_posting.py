@@ -1,7 +1,8 @@
 from django.db import models
+from softdelete.models import SoftDeleteModel
 
 
-class JobPosting(models.Model):
+class JobPosting(SoftDeleteModel):
     title = models.CharField(max_length=200)
     category = models.ForeignKey('Category', blank=False, null=True, on_delete=models.SET_NULL)
     is_open = models.BooleanField(default=True, db_index=True)

@@ -13,7 +13,7 @@
                     </div>
                 </div>
             </div>
-            <div class="uk-width-1-1">
+            <div class="uk-width-4-5@m uk-width-1-1@s">
                 <div class="uk-container uk-padding-small">
                     <router-view></router-view>
                 </div>

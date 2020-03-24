@@ -160,7 +160,7 @@
                                 </div>
                             </header>
                             <div class="uk-comment-body">
-                                <p>{{ comment.body }}</p>
+                                <p v-html="comment.body.replace(/(?:\r\n|\r|\n)/g, '<br>')"></p>
                             </div>
                         </article>
                     </li>
@@ -179,6 +179,8 @@
     import UIKit from "uikit";
     import JalaliDateHelper from "../../helpers/jalali_date";
     import {mapState} from 'vuex';
+    import audioSrc from '../../assets/sounds/comment_notification.mp3';
+    import {Howl} from 'howler';
 
     export default {
         name: 'ApplicantView',
@@ -232,11 +234,13 @@
             });
         },
         computed: {
-            ...mapState(['applicationStatuses', 'errors', 'errorMessage'])
+            ...mapState(['applicationStatuses', 'errors', 'errorMessage', 'user'])
         },
         methods: {
             closeSocket() {
-                this.commentsSocket.close();
+                if (this.commentsSocket !== null) {
+                    this.commentsSocket.close();
+                }
                 this.commentsSocket = null;
             },
             connectSocket() {
@@ -259,6 +263,18 @@
                     data = JSON.parse(data);
                     const {comment} = data;
                     this.comments.unshift(comment);
+                    if (parseInt(comment.user) !== parseInt(this.user.id)) {
+                        const sound = new Howl({
+                            src: [audioSrc],
+                            onplayerror: function () {
+                                sound.once('unlock', function () {
+                                    sound.play();
+                                });
+                            }
+                        });
+
+                        sound.play();
+                    }
                 };
             },
             async submitComment() {

@@ -17,6 +17,7 @@ export default new Vuex.Store({
             username: localStorage.getItem('username'),
             name: localStorage.getItem('name'),
             email: localStorage.getItem('email'),
+            id: localStorage.getItem('id'),
         },
         errors: {},
         errorMessage: '',
@@ -30,9 +31,11 @@ export default new Vuex.Store({
             localStorage.setItem('username', payload.username);
             localStorage.setItem('name', payload.full_name);
             localStorage.setItem('email', payload.email);
+            localStorage.setItem('id', payload.id);
             state.user.username = payload.username;
             state.user.name = payload.full_name;
             state.user.email = payload.email;
+            state.user.id = payload.id;
         },
         setRefreshingState(state, payload) {
             state.isRefreshing = payload;
@@ -55,9 +58,11 @@ export default new Vuex.Store({
             localStorage.removeItem('username');
             localStorage.removeItem('name');
             localStorage.removeItem('email');
+            localStorage.removeItem('id');
             state.user.username = '';
             state.user.name = '';
             state.user.email = '';
+            state.user.id = '';
             state.token = '';
             state.refreshToken = '';
         },

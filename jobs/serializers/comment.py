@@ -17,8 +17,8 @@ class CommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Comment
-        exclude = ['user']
-        read_only_fields = ['created_at', 'updated_at']
+        fields = '__all__'
+        read_only_fields = ['user', 'created_at', 'updated_at']
         extra_kwargs = {'applicant': {'write_only': True}}
 
     def create(self, validated_data):

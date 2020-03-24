@@ -1,21 +1,21 @@
 <template>
-  <div id="app">
-    <router-view></router-view>
-  </div>
+    <div id="app">
+        <router-view></router-view>
+    </div>
 </template>
 
 <script>
-import UIkit from 'uikit';
-import Icons from 'uikit/dist/js/uikit-icons';
+    import UIkit from 'uikit';
+    import Icons from 'uikit/dist/js/uikit-icons';
 
-UIkit.use(Icons);
+    UIkit.use(Icons);
 
-export default {
-  name: 'App',
-  components: {}
-}
+    export default {
+        name: 'App',
+        components: {}
+    }
 </script>
 
 <style lang="less">
-  @import "assets/style.less";
+    @import "assets/style.less";
 </style>

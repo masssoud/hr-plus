@@ -6,6 +6,12 @@ export default [
             import(/* webpackChunkName: "applicants" */ '../views/applicants/Applicants.vue'),
     },
     {
+        path: 'applicants/table-view',
+        name: 'applicants-table-view',
+        component: () =>
+            import(/* webpackChunkName: "applicants-table-view" */ '../views/applicants/ApplicantsTableView.vue'),
+    },
+    {
         path: 'applicants/create',
         name: 'create-applicant',
         component: () =>

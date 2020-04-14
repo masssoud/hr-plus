@@ -3,7 +3,7 @@ HR Plus is a web application for HR purposes
 
 ## Env Files
 * Inside the root directory copy `.env.example` file and name it `.env`. Then complete the data before running the project.
-* Inside panel directory copy `.env.example` file and name it `.env`. Then complete the data before running the project.
+* Inside the panel directory copy `.env.example` file and name it `.env`. Then complete the data before running the project.
 
 ## Run the Project for Development
 Run `docker-compose -f docker-compose.yml -f docker-compose.dev.yml up`

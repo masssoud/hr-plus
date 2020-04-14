@@ -3,17 +3,26 @@ version: "3"
 services:
   app:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code
-#    ports:
-#      - "8888:8000"
     expose:
       - 8000
     networks:
       - hrplus-network
     depends_on:
       - postgres
+
+  panel:
+    build:
+      context: ./panel
+      dockerfile: Dockerfile
+    container_name: hr-plus-panel
+    volumes:
+      - './panel:/code'
+    networks:
+      - hrplus-network
+    depends_on:
+      - app
 
   nginx:
     image: nginx

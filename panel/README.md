@@ -1,4 +1,4 @@
-# panel
+# Panel
 
 ## Project setup
 ```

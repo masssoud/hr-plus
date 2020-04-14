@@ -39,7 +39,6 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'channels',
     'jobs.apps.JobsConfig',
-    'panel.apps.PanelConfig',
     'users.apps.UsersConfig',
     # 'django.contrib.admin',
     'django.contrib.auth',
@@ -141,7 +140,6 @@ USE_TZ = True
 LOCALE_PATHS = [
     '/code/app/locale',
     '/code/jobs/locale',
-    '/code/panel/locale',
     '/code/users/locale',
 ]
 

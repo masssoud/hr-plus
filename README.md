@@ -8,8 +8,11 @@ HR Plus is a web application for HR purposes
 ## Migrations
 To run the migrations run `docker-compose run app python manage.py migrate`.
 
-##  Superuser
+## Superuser
 To create superuser run `docker-compose run app python manage.py createsuperuser`.
+
+## Do this the first time
+Run the following command `docker-compose run app python manage.py collectstatic` once to publish static files.
 
 ## Run the Project for Development
 Run `docker-compose -f docker-compose.yml -f docker-compose.dev.yml up`

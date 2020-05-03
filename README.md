@@ -11,8 +11,11 @@ To run the migrations run `docker-compose run app python manage.py migrate`.
 ## Superuser
 To create superuser run `docker-compose run app python manage.py createsuperuser`.
 
-## Do this the first time
+## Do This the First Time
 Run the following command `docker-compose run app python manage.py collectstatic` once to publish static files.
+
+## Translations
+Run the following command `docker-compose run app manage.py compilemessages -l fa_IR` for translations.
 
 ## Run the Project for Development
 Run `docker-compose -f docker-compose.yml -f docker-compose.dev.yml up`

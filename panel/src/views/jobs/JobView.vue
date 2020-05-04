@@ -26,38 +26,83 @@
             </div>
             <div class="uk-card-body">
                 <dl class="uk-description-list">
-                    <dt>شناسه</dt>
-                    <dd>{{ item.id }}</dd>
-                    <hr>
-                    <dt>عنوان</dt>
-                    <dd>{{ item.title }}</dd>
-                    <hr>
-                    <dt>دسته‌بندی</dt>
-                    <dd>{{ item.category_title }}</dd>
-                    <hr>
-                    <dt>توضیحات</dt>
-                    <dd v-html="item.description"></dd>
-                    <hr>
-                    <dt>صلاحیت‌ها</dt>
-                    <dd v-html="item.qualifications"></dd>
-                    <hr>
-                    <dt>موارد مورد نیاز</dt>
-                    <dd v-html="item.requirements"></dd>
-                    <hr>
-                    <dt>مواردی که داشتن آنها خوب است</dt>
-                    <dd v-html="item.good_to_have"></dd>
-                    <hr>
-                    <dt>مزایا</dt>
-                    <dd v-html="item.benefits"></dd>
-                    <hr>
-                    <dt>آیا موقعیت باز است؟</dt>
-                    <dd>{{ (item.is_open)? 'بله':'خیر' }}</dd>
-                    <hr>
-                    <dt>زمان ایجاد</dt>
-                    <dd>{{ gregorianToJalali(item.created_at, 'HH:mm:ss YYYY/MM/DD') }}</dd>
-                    <hr>
-                    <dt>زمان آخرین ویرایش</dt>
-                    <dd>{{ gregorianToJalali(item.updated_at, 'HH:mm:ss YYYY/MM/DD') }}</dd>
+                    <div class="uk-grid-match" uk-grid>
+                        <div class="uk-width-1-2@m uk-grid-item-match ">
+                            <div class="uk-card uk-card-default uk-card-body uk-box-shadow-small">
+                                <dt>شناسه</dt>
+                                <dd>{{ item.id }}</dd>
+                            </div>
+                        </div>
+                        <div class="uk-width-1-2@m uk-grid-item-match ">
+                            <div class="uk-card uk-card-default uk-card-body uk-box-shadow-small">
+                                <dt>عنوان</dt>
+                                <dd>{{ item.title }}</dd>
+
+                            </div>
+                        </div>
+                        <div class="uk-width-1-2@m uk-grid-item-match ">
+                            <div class="uk-card uk-card-default uk-card-body uk-box-shadow-small">
+                                <dt>دسته‌بندی</dt>
+                                <dd>{{ item.category_title }}</dd>
+
+                            </div>
+                        </div>
+                        <div class="uk-width-1-2@m uk-grid-item-match ">
+                            <div class="uk-card uk-card-default uk-card-body uk-box-shadow-small">
+                                <dt>آیا موقعیت باز است؟</dt>
+                                <dd>{{ (item.is_open)? 'بله':'خیر' }}</dd>
+
+                            </div>
+                        </div>
+                        <div class="uk-width-1-1@m uk-grid-item-match ">
+                            <div class="uk-card uk-card-default uk-card-body uk-box-shadow-small">
+                                <dt>توضیحات</dt>
+                                <dd v-html="item.description"></dd>
+
+                            </div>
+                        </div>
+                        <div class="uk-width-1-1@m uk-grid-item-match ">
+                            <div class="uk-card uk-card-default uk-card-body uk-box-shadow-small">
+                                <dt>صلاحیت‌ها</dt>
+                                <dd v-html="item.qualifications"></dd>
+
+                            </div>
+                        </div>
+                        <div class="uk-width-1-1@m uk-grid-item-match ">
+                            <div class="uk-card uk-card-default uk-card-body uk-box-shadow-small">
+                                <dt>موارد مورد نیاز</dt>
+                                <dd v-html="item.requirements"></dd>
+
+                            </div>
+                        </div>
+                        <div class="uk-width-1-1@m uk-grid-item-match ">
+                            <div class="uk-card uk-card-default uk-card-body uk-box-shadow-small">
+                                <dt>مواردی که داشتن آنها خوب است</dt>
+                                <dd v-html="item.good_to_have"></dd>
+
+                            </div>
+                        </div>
+                        <div class="uk-width-1-1@m uk-grid-item-match ">
+                            <div class="uk-card uk-card-default uk-card-body uk-box-shadow-small">
+                                <dt>مزایا</dt>
+                                <dd v-html="item.benefits"></dd>
+
+                            </div>
+                        </div>
+                        <div class="uk-width-1-2@m uk-grid-item-match ">
+                            <div class="uk-card uk-card-default uk-card-body uk-box-shadow-small">
+                                <dt>زمان ایجاد</dt>
+                                <dd>{{ gregorianToJalali(item.created_at, 'HH:mm:ss jYYYY/jMM/jDD') }}</dd>
+
+                            </div>
+                        </div>
+                        <div class="uk-width-1-2@m uk-grid-item-match ">
+                            <div class="uk-card uk-card-default uk-card-body uk-box-shadow-small">
+                                <dt>زمان آخرین ویرایش</dt>
+                                <dd>{{ gregorianToJalali(item.updated_at, 'HH:mm:ss jYYYY/jMM/jDD') }}</dd>
+                            </div>
+                        </div>
+                    </div>
                 </dl>
             </div>
         </div>

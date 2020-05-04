@@ -2,165 +2,181 @@
     <ValidationObserver ref="form" v-slot="{ invalid }">
         <form @submit.prevent="ownOnSubmit" class="uk-form-stacked">
             <fieldset class="uk-fieldset">
-                <div class="uk-margin">
-                    <ValidationProvider name="نام" vid="first_name" rules="required"
-                                        v-slot="{ errors }">
-                        <label
-                                class="uk-form-label"
-                                v-bind:class="{ 'uk-text-danger': (errors.length>0) }"
-                        >
-                            نام
-                        </label>
-                        <div class="uk-form-controls">
-                            <input v-model="first_name"
-                                   class="uk-input"
-                                   v-bind:class="{ 'uk-form-danger': (errors.length>0) }"
-                                   type="text" placeholder="نام">
+                <div class="uk-grid-match" uk-grid>
+                    <div class="uk-width-1-2@m uk-grid-item-match ">
+                        <div class="uk-margin">
+                            <ValidationProvider name="نام" vid="first_name" rules="required"
+                                                v-slot="{ errors }">
+                                <label
+                                        class="uk-form-label"
+                                        v-bind:class="{ 'uk-text-danger': (errors.length>0) }"
+                                >
+                                    نام
+                                </label>
+                                <div class="uk-form-controls">
+                                    <input v-model="first_name"
+                                           class="uk-input"
+                                           v-bind:class="{ 'uk-form-danger': (errors.length>0) }"
+                                           type="text" placeholder="نام">
+                                </div>
+                                <div v-if="errors.length>0">
+                                    <div class="uk-text-danger" v-for="(error, index) in errors" :key="index">
+                                        {{ error }}
+                                    </div>
+                                </div>
+                            </ValidationProvider>
                         </div>
-                        <div v-if="errors.length>0">
-                            <div class="uk-text-danger" v-for="(error, index) in errors" :key="index">
-                                {{ error }}
-                            </div>
+                    </div>
+                    <div class="uk-width-1-2@m uk-grid-item-match ">
+                        <div class="uk-margin">
+                            <ValidationProvider name="نام خانوادگی" vid="last_name" rules="required"
+                                                v-slot="{ errors }">
+                                <label
+                                        class="uk-form-label"
+                                        v-bind:class="{ 'uk-text-danger': (errors.length>0) }"
+                                >
+                                    نام خانوادگی
+                                </label>
+                                <div class="uk-form-controls">
+                                    <input v-model="last_name"
+                                           class="uk-input"
+                                           v-bind:class="{ 'uk-form-danger': (errors.length>0) }"
+                                           type="text" placeholder="نام خانوادگی">
+                                </div>
+                                <div v-if="errors.length>0">
+                                    <div class="uk-text-danger" v-for="(error, index) in errors" :key="index">
+                                        {{ error }}
+                                    </div>
+                                </div>
+                            </ValidationProvider>
                         </div>
-                    </ValidationProvider>
-                </div>
-                <div class="uk-margin">
-                    <ValidationProvider name="نام خانوادگی" vid="last_name" rules="required"
-                                        v-slot="{ errors }">
-                        <label
-                                class="uk-form-label"
-                                v-bind:class="{ 'uk-text-danger': (errors.length>0) }"
-                        >
-                            نام خانوادگی
-                        </label>
-                        <div class="uk-form-controls">
-                            <input v-model="last_name"
-                                   class="uk-input"
-                                   v-bind:class="{ 'uk-form-danger': (errors.length>0) }"
-                                   type="text" placeholder="نام خانوادگی">
+                    </div>
+                    <div class="uk-width-1-2@m uk-grid-item-match ">
+                        <div class="uk-margin">
+                            <ValidationProvider name="نام کاربری" vid="username" rules="required"
+                                                v-slot="{ errors }">
+                                <label
+                                        class="uk-form-label"
+                                        v-bind:class="{ 'uk-text-danger': (errors.length>0) }"
+                                >
+                                    نام کاربری
+                                </label>
+                                <div class="uk-form-controls">
+                                    <input v-model="username"
+                                           class="uk-input"
+                                           v-bind:class="{ 'uk-form-danger': (errors.length>0) }"
+                                           type="text" placeholder="نام کاربری">
+                                </div>
+                                <div v-if="errors.length>0">
+                                    <div class="uk-text-danger" v-for="(error, index) in errors" :key="index">
+                                        {{ error }}
+                                    </div>
+                                </div>
+                            </ValidationProvider>
                         </div>
-                        <div v-if="errors.length>0">
-                            <div class="uk-text-danger" v-for="(error, index) in errors" :key="index">
-                                {{ error }}
-                            </div>
+                    </div>
+                    <div class="uk-width-1-2@m uk-grid-item-match ">
+                        <div class="uk-margin">
+                            <ValidationProvider name="آدرس ایمیل" vid="email" rules="required"
+                                                v-slot="{ errors }">
+                                <label
+                                        class="uk-form-label"
+                                        v-bind:class="{ 'uk-text-danger': (errors.length>0) }"
+                                >
+                                    آدرس ایمیل
+                                </label>
+                                <div class="uk-form-controls">
+                                    <input v-model="email"
+                                           class="uk-input"
+                                           v-bind:class="{ 'uk-form-danger': (errors.length>0) }"
+                                           type="email" placeholder="آدرس ایمیل">
+                                </div>
+                                <div v-if="errors.length>0">
+                                    <div class="uk-text-danger" v-for="(error, index) in errors" :key="index">
+                                        {{ error }}
+                                    </div>
+                                </div>
+                            </ValidationProvider>
                         </div>
-                    </ValidationProvider>
-                </div>
-                <div class="uk-margin">
-                    <ValidationProvider name="نام کاربری" vid="username" rules="required"
-                                        v-slot="{ errors }">
-                        <label
-                                class="uk-form-label"
-                                v-bind:class="{ 'uk-text-danger': (errors.length>0) }"
-                        >
-                            نام کاربری
-                        </label>
-                        <div class="uk-form-controls">
-                            <input v-model="username"
-                                   class="uk-input"
-                                   v-bind:class="{ 'uk-form-danger': (errors.length>0) }"
-                                   type="text" placeholder="نام کاربری">
+                    </div>
+                    <div class="uk-width-1-2@m uk-grid-item-match ">
+                        <div class="uk-margin">
+                            <ValidationProvider name="آیا کاربر کارمند است؟" vid="is_staff" rules="required"
+                                                v-slot="{ errors }">
+                                <label
+                                        class="uk-form-label"
+                                        v-bind:class="{ 'uk-text-danger': (errors.length>0) }"
+                                >
+                                    آیا کاربر کارمند است؟
+                                </label>
+                                <div class="uk-form-controls">
+                                    <select v-model="is_staff" class="uk-select">
+                                        <option value="1">بله</option>
+                                        <option value="0">خیر</option>
+                                    </select>
+                                </div>
+                                <div v-if="errors.length>0">
+                                    <div class="uk-text-danger" v-for="(error, index) in errors" :key="index">
+                                        {{ error }}
+                                    </div>
+                                </div>
+                            </ValidationProvider>
                         </div>
-                        <div v-if="errors.length>0">
-                            <div class="uk-text-danger" v-for="(error, index) in errors" :key="index">
-                                {{ error }}
-                            </div>
+                    </div>
+                    <div class="uk-width-1-2@m uk-grid-item-match ">
+                        <div class="uk-margin">
+                            <ValidationProvider name="آیا کاربر فعال است؟" vid="is_active" rules="required"
+                                                v-slot="{ errors }">
+                                <label
+                                        class="uk-form-label"
+                                        v-bind:class="{ 'uk-text-danger': (errors.length>0) }"
+                                >
+                                    آیا کاربر فعال است؟
+                                </label>
+                                <div class="uk-form-controls">
+                                    <select v-model="is_active" class="uk-select">
+                                        <option value="1">بله</option>
+                                        <option value="0">خیر</option>
+                                    </select>
+                                </div>
+                                <div v-if="errors.length>0">
+                                    <div class="uk-text-danger" v-for="(error, index) in errors" :key="index">
+                                        {{ error }}
+                                    </div>
+                                </div>
+                            </ValidationProvider>
                         </div>
-                    </ValidationProvider>
-                </div>
-                <div class="uk-margin">
-                    <ValidationProvider name="آدرس ایمیل" vid="email" rules="required"
-                                        v-slot="{ errors }">
-                        <label
-                                class="uk-form-label"
-                                v-bind:class="{ 'uk-text-danger': (errors.length>0) }"
-                        >
-                            آدرس ایمیل
-                        </label>
-                        <div class="uk-form-controls">
-                            <input v-model="email"
-                                   class="uk-input"
-                                   v-bind:class="{ 'uk-form-danger': (errors.length>0) }"
-                                   type="email" placeholder="آدرس ایمیل">
+                    </div>
+                    <div class="uk-width-1-1@m uk-grid-item-match ">
+                        <div class="uk-margin" v-if="id">
+                            <a class="uk-button uk-button-default" @click="showPasswordField">
+                                <span v-if="!show_password_field">تغییر کلمه عبور</span>
+                                <span v-if="show_password_field">عدم تغییر کلمه عبور</span>
+                            </a>
                         </div>
-                        <div v-if="errors.length>0">
-                            <div class="uk-text-danger" v-for="(error, index) in errors" :key="index">
-                                {{ error }}
-                            </div>
+                        <div class="uk-margin" v-if="show_password_field">
+                            <ValidationProvider name="گذرواژه" vid="password" :rules="(id === '')? 'required':''"
+                                                v-slot="{ errors }">
+                                <label
+                                        class="uk-form-label"
+                                        v-bind:class="{ 'uk-text-danger': (errors.length>0) }"
+                                >
+                                    گذرواژه
+                                </label>
+                                <div class="uk-form-controls">
+                                    <input v-model="password"
+                                           class="uk-input"
+                                           v-bind:class="{ 'uk-form-danger': (errors.length>0) }"
+                                           type="password" placeholder="گذرواژه">
+                                </div>
+                                <div v-if="errors.length>0">
+                                    <div class="uk-text-danger" v-for="(error, index) in errors" :key="index">
+                                        {{ error }}
+                                    </div>
+                                </div>
+                            </ValidationProvider>
                         </div>
-                    </ValidationProvider>
-                </div>
-                <div class="uk-margin" v-if="id">
-                    <a class="uk-button uk-button-default" @click="showPasswordField">
-                        <span v-if="!show_password_field">تغییر کلمه عبور</span>
-                        <span v-if="show_password_field">عدم تغییر کلمه عبور</span>
-                    </a>
-                </div>
-                <div class="uk-margin" v-if="show_password_field">
-                    <ValidationProvider name="گذرواژه" vid="password" :rules="(id === '')? 'required':''"
-                                        v-slot="{ errors }">
-                        <label
-                                class="uk-form-label"
-                                v-bind:class="{ 'uk-text-danger': (errors.length>0) }"
-                        >
-                            گذرواژه
-                        </label>
-                        <div class="uk-form-controls">
-                            <input v-model="password"
-                                   class="uk-input"
-                                   v-bind:class="{ 'uk-form-danger': (errors.length>0) }"
-                                   type="password" placeholder="گذرواژه">
-                        </div>
-                        <div v-if="errors.length>0">
-                            <div class="uk-text-danger" v-for="(error, index) in errors" :key="index">
-                                {{ error }}
-                            </div>
-                        </div>
-                    </ValidationProvider>
-                </div>
-                <div class="uk-margin">
-                    <ValidationProvider name="آیا کاربر کارمند است؟" vid="is_staff" rules="required"
-                                        v-slot="{ errors }">
-                        <label
-                                class="uk-form-label"
-                                v-bind:class="{ 'uk-text-danger': (errors.length>0) }"
-                        >
-                            آیا کاربر کارمند است؟
-                        </label>
-                        <div class="uk-form-controls">
-                            <select v-model="is_staff" class="uk-select">
-                                <option value="1">بله</option>
-                                <option value="0">خیر</option>
-                            </select>
-                        </div>
-                        <div v-if="errors.length>0">
-                            <div class="uk-text-danger" v-for="(error, index) in errors" :key="index">
-                                {{ error }}
-                            </div>
-                        </div>
-                    </ValidationProvider>
-                </div>
-                <div class="uk-margin">
-                    <ValidationProvider name="آیا کاربر فعال است؟" vid="is_active" rules="required"
-                                        v-slot="{ errors }">
-                        <label
-                                class="uk-form-label"
-                                v-bind:class="{ 'uk-text-danger': (errors.length>0) }"
-                        >
-                            آیا کاربر فعال است؟
-                        </label>
-                        <div class="uk-form-controls">
-                            <select v-model="is_active" class="uk-select">
-                                <option value="1">بله</option>
-                                <option value="0">خیر</option>
-                            </select>
-                        </div>
-                        <div v-if="errors.length>0">
-                            <div class="uk-text-danger" v-for="(error, index) in errors" :key="index">
-                                {{ error }}
-                            </div>
-                        </div>
-                    </ValidationProvider>
+                    </div>
                 </div>
                 <div class="uk-margin">
                     <button type="submit" class="uk-button uk-button-primary"

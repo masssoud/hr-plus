@@ -22,12 +22,26 @@
             </div>
             <div class="uk-card-body">
                 <dl class="uk-description-list">
-                    <dt>شناسه</dt>
-                    <dd>{{ item.id }}</dd>
-                    <dt>عنوان</dt>
-                    <dd>{{ item.title }}</dd>
-                    <dt>توضیحات</dt>
-                    <dd v-html="item.description"></dd>
+                    <div class="uk-grid-match" uk-grid>
+                        <div class="uk-width-1-2@m uk-grid-item-match ">
+                            <div class="uk-card uk-card-default uk-card-body uk-box-shadow-small">
+                                <dt>شناسه</dt>
+                                <dd>{{ item.id }}</dd>
+                            </div>
+                        </div>
+                        <div class="uk-width-1-2@m uk-grid-item-match ">
+                            <div class="uk-card uk-card-default uk-card-body uk-box-shadow-small">
+                                <dt>عنوان</dt>
+                                <dd>{{ item.title }}</dd>
+                            </div>
+                        </div>
+                        <div class="uk-width-1-1@m uk-grid-item-match ">
+                            <div class="uk-card uk-card-default uk-card-body uk-box-shadow-small">
+                                <dt>توضیحات</dt>
+                                <dd v-html="item.description"></dd>
+                            </div>
+                        </div>
+                    </div>
                 </dl>
             </div>
         </div>

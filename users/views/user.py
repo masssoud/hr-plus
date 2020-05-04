@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from rest_framework import viewsets
 from users.serializers import UserListSerializer, UserDetailSerializer, CreateUpdateUserSerializer
 from rest_framework import permissions
@@ -10,7 +10,7 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows categories to be viewed or edited.
     """
-    queryset = User.objects.all().order_by('date_joined')
+    queryset = get_user_model().objects.all().order_by('date_joined')
     permission_classes = [permissions.IsAdminUser]
 
     def get_serializer_class(self):

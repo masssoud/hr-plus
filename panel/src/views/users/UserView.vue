@@ -22,33 +22,60 @@
             </div>
             <div class="uk-card-body">
                 <dl class="uk-description-list">
-                    <dt>شناسه</dt>
-                    <dd>{{ item.id }}</dd>
-                    <hr>
-                    <dt>نام</dt>
-                    <dd>{{ item.first_name }}</dd>
-                    <hr>
-                    <dt>نام خانوادگی</dt>
-                    <dd>{{ item.last_name }}</dd>
-                    <hr>
-                    <dt>نام کاربری</dt>
-                    <dd>{{ item.username }}</dd>
-                    <hr>
-                    <dt>آدرس ایمیل</dt>
-                    <dd>{{ item.email }}</dd>
-                    <hr>
-                    <dt>آیا کاربر کارمند است؟</dt>
-                    <dd>{{ (item.is_staff) ? 'بله' : 'خیر' }}</dd>
-                    <hr>
-                    <dt>آیا کاربر فعال است؟</dt>
-                    <dd>{{ (item.is_active) ? 'بله' : 'خیر' }}</dd>
-                    <hr>
-                    <dt>تاریخ عضویت</dt>
-                    <dd>{{ (item.date_joined) ? gregorianToJalali(item.date_joined, 'HH:mm:ss YYYY/MM/DD'):'' }}</dd>
-                    <hr>
-                    <dt>تاریخ آخرین ورود</dt>
-                    <dd>{{ (item.last_login) ? gregorianToJalali(item.last_login, 'HH:mm:ss YYYY/MM/DD'):'' }}</dd>
-                    <hr>
+                    <div class="uk-grid-match" uk-grid>
+                        <div class="uk-width-1-2@m uk-grid-item-match ">
+                            <div class="uk-card uk-card-default uk-card-body uk-box-shadow-small">
+                                <dt>شناسه</dt>
+                                <dd>{{ item.id }}</dd>
+                            </div>
+                        </div>
+                        <div class="uk-width-1-2@m uk-grid-item-match ">
+                            <div class="uk-card uk-card-default uk-card-body uk-box-shadow-small">
+                                <dt>نام</dt>
+                                <dd>{{ item.first_name }}</dd>
+                            </div>
+                        </div>
+                        <div class="uk-width-1-2@m uk-grid-item-match ">
+                            <div class="uk-card uk-card-default uk-card-body uk-box-shadow-small">
+                                <dt>نام خانوادگی</dt>
+                                <dd>{{ item.last_name }}</dd>
+                            </div>
+                        </div>
+                        <div class="uk-width-1-2@m uk-grid-item-match ">
+                            <div class="uk-card uk-card-default uk-card-body uk-box-shadow-small">
+                                <dt>نام کاربری</dt>
+                                <dd>{{ item.username }}</dd>
+                            </div>
+                        </div>
+                        <div class="uk-width-1-2@m uk-grid-item-match ">
+                            <div class="uk-card uk-card-default uk-card-body uk-box-shadow-small">
+                                <dt>آدرس ایمیل</dt>
+                                <dd>{{ item.email }}</dd>
+                            </div>
+                        </div>
+                        <div class="uk-width-1-2@m uk-grid-item-match ">
+                            <div class="uk-card uk-card-default uk-card-body uk-box-shadow-small">
+                                <dt>آیا کاربر کارمند است؟</dt>
+                                <dd>{{ (item.is_staff) ? 'بله' : 'خیر' }}</dd>
+                            </div>
+                        </div>
+                        <div class="uk-width-1-2@m uk-grid-item-match ">
+                            <div class="uk-card uk-card-default uk-card-body uk-box-shadow-small">
+                                <dt>آیا کاربر فعال است؟</dt>
+                                <dd>{{ (item.is_active) ? 'بله' : 'خیر' }}</dd>
+                            </div>
+                        </div>
+                        <div class="uk-width-1-2@m uk-grid-item-match ">
+                            <div class="uk-card uk-card-default uk-card-body uk-box-shadow-small">
+                                <dt>تاریخ عضویت</dt>
+                                <dd>{{
+                                    (item.date_joined) ?
+                                    gregorianToJalali(item.date_joined, 'HH:mm:ss jYYYY/jMM/jDD'):''
+                                    }}
+                                </dd>
+                            </div>
+                        </div>
+                    </div>
                 </dl>
             </div>
         </div>

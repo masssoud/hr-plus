@@ -7,7 +7,3 @@ services:
   postgres:
     ports:
       - '5660:5432'
-  panel:
-    ports:
-      - "8080:8080"
-    command: npm run serve

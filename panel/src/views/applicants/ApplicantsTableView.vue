@@ -101,7 +101,7 @@
                             created_at:{
                                 label: 'تاریخ درخواست',
                                 value: (item) => {
-                                    return gregorianToJalali(item.created_at, 'HH:mm:ss YYYY/MM/DD');
+                                    return gregorianToJalali(item.created_at, 'HH:mm:ss jYYYY/jMM/jDD');
                                 },
                             }
                          }"

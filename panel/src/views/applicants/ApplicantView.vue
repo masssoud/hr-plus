@@ -96,13 +96,13 @@
                                 <div class="uk-width-1-2@m uk-grid-item-match ">
                                     <div class="uk-card uk-card-default uk-card-body uk-box-shadow-small">
                                         <dt>زمان ایجاد</dt>
-                                        <dd>{{ gregorianToJalali(item.created_at, 'HH:mm:ss YYYY/MM/DD') }}</dd>
+                                        <dd>{{ gregorianToJalali(item.created_at, 'HH:mm:ss jYYYY/jMM/jDD') }}</dd>
                                     </div>
                                 </div>
                                 <div class="uk-width-1-2@m uk-grid-item-match ">
                                     <div class="uk-card uk-card-default uk-card-body uk-box-shadow-small">
                                         <dt>زمان آخرین ویرایش</dt>
-                                        <dd>{{ gregorianToJalali(item.updated_at, 'HH:mm:ss YYYY/MM/DD') }}</dd>
+                                        <dd>{{ gregorianToJalali(item.updated_at, 'HH:mm:ss jYYYY/jMM/jDD') }}</dd>
                                     </div>
                                 </div>
                             </div>

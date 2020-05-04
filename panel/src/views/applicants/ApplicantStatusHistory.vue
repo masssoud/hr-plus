@@ -40,7 +40,7 @@
                             <p>
                                 <span class="uk-text-muted">
                                     تاریخ:
-                                    {{ gregorianToJalali(status.created_at, 'HH:mm:ss YYYY/MM/DD') }}
+                                    {{ gregorianToJalali(status.created_at, 'HH:mm:ss jYYYY/jMM/jDD') }}
                                 </span>
                                 <br>
                                 <span class="uk-text-muted">

@@ -38,8 +38,8 @@ ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',') if len(os.getenv('ALLOWED_
 
 INSTALLED_APPS = [
     'channels',
-    'jobs.apps.JobsConfig',
     'users.apps.UsersConfig',
+    'jobs.apps.JobsConfig',
     # 'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -103,6 +103,8 @@ DATABASES = {
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/3.0/howto/static-files/
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
@@ -142,11 +144,6 @@ LOCALE_PATHS = [
     '/code/jobs/locale',
     '/code/users/locale',
 ]
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.0/howto/static-files/
-
-STATIC_URL = '/static/'
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=int(os.getenv('JWT_TOKEN_EXPIRE_MINUTES'))),

@@ -1,15 +1,15 @@
-import moment from 'jalali-moment';
+import moment from 'moment-jalaali'
 
 class JalaliDateHelper {
     static gregorianToJalali = (gregorian, jalaliFormat) => {
         const date = moment(gregorian);
-        return date.locale('fa').format(jalaliFormat);
+        return date.format(jalaliFormat);
     };
 
     static humanReadable = (gregorian) => {
         const start = moment(new Date());
         const date = moment(gregorian);
-        return date.locale('fa').from(start);
+        return date.from(start);
     };
 }
 

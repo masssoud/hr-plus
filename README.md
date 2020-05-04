@@ -18,13 +18,17 @@ Run the following command `docker-compose run app python manage.py collectstatic
 Run the following command `docker-compose run app manage.py compilemessages -l fa_IR` for translations.
 
 ## Run the Project for Development
-Run `docker-compose -f docker-compose.yml -f docker-compose.dev.yml up`
-<br><br>
+1. Run `docker-compose -f docker-compose.yml -f docker-compose.dev.yml up`.
+2. Run `docker-compose run panel npm install` to  install panel packages.
+3. Then run `docker-compose run --service-ports panel npm run serve` for panel.
+
 The panel is accessible through http://localhost:8080 and the apis are accessible through http://localhost:8888
 
 ## Run the Project for Production
-Run `docker-compose -f docker-compose.yml -f docker-compose.prod.yml up`
-<br><br>
-The panel is accessible through http://localhost:8888/panel/ and the apis are accessible through http://localhost:8888
+1. Run `docker-compose -f docker-compose.yml -f docker-compose.prod.yml up`.
+2. Run `docker-compose run panel npm install` to  install panel packages.
+3. Then run `docker-compose run panel npm run build` to build the panel.
+
+The panel is accessible through http://localhost:8888/panel/ and the APIs are accessible through http://localhost:8888
 <br><br>
 ___Be careful as the production docker-compose file may not be optimized for production!___

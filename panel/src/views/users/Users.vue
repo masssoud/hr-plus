@@ -29,7 +29,7 @@
                             date_joined:{
                                 label: 'تاریخ عضویت',
                                 value: (item) => {
-                                    return gregorianToJalali(item.date_joined, 'HH:mm:ss YYYY/MM/DD');
+                                    return gregorianToJalali(item.date_joined, 'HH:mm:ss jYYYY/jMM/jDD');
                                 },
                             },
                          }"

@@ -2,48 +2,54 @@
     <ValidationObserver ref="form" v-slot="{ invalid }">
         <form @submit.prevent="ownOnSubmit" class="uk-form-stacked">
             <fieldset class="uk-fieldset">
-                <div class="uk-margin">
-                    <ValidationProvider name="عنوان" vid="title" rules="required"
-                                        v-slot="{ errors }">
-                        <label
-                                class="uk-form-label"
-                                v-bind:class="{ 'uk-text-danger': (errors.length>0) }"
-                        >
-                            عنوان
-                        </label>
-                        <div class="uk-form-controls">
-                            <input v-model="title"
-                                   class="uk-input"
-                                   v-bind:class="{ 'uk-form-danger': (errors.length>0) }"
-                                   type="text" placeholder="عنوان">
+                <div class="uk-grid-match" uk-grid>
+                    <div class="uk-width-1-1@m uk-grid-item-match ">
+                        <div class="uk-margin">
+                            <ValidationProvider name="عنوان" vid="title" rules="required"
+                                                v-slot="{ errors }">
+                                <label
+                                        class="uk-form-label"
+                                        v-bind:class="{ 'uk-text-danger': (errors.length>0) }"
+                                >
+                                    عنوان
+                                </label>
+                                <div class="uk-form-controls">
+                                    <input v-model="title"
+                                           class="uk-input"
+                                           v-bind:class="{ 'uk-form-danger': (errors.length>0) }"
+                                           type="text" placeholder="عنوان">
+                                </div>
+                                <div v-if="errors.length>0">
+                                    <div class="uk-text-danger" v-for="(error, index) in errors" :key="index">
+                                        {{ error }}
+                                    </div>
+                                </div>
+                            </ValidationProvider>
                         </div>
-                        <div v-if="errors.length>0">
-                            <div class="uk-text-danger" v-for="(error, index) in errors" :key="index">
-                                {{ error }}
-                            </div>
+                    </div>
+                    <div class="uk-width-1-1@m uk-grid-item-match ">
+                        <div class="uk-margin">
+                            <ValidationProvider name="توضیحات" vid="description"
+                                                v-slot="{ errors }">
+                                <label
+                                        class="uk-form-label"
+                                        v-bind:class="{ 'uk-text-danger': (errors.length>0) }"
+                                >
+                                    توضیحات
+                                </label>
+                                <textarea v-model="description"
+                                          class="uk-textarea"
+                                          v-bind:class="{ 'uk-form-danger': (errors.length>0) }"
+                                          rows="5"
+                                          placeholder="توضیحات"></textarea>
+                                <div v-if="errors.length>0">
+                                    <div class="uk-text-danger" v-for="(error, index) in errors" :key="index">
+                                        {{ error }}
+                                    </div>
+                                </div>
+                            </ValidationProvider>
                         </div>
-                    </ValidationProvider>
-                </div>
-                <div class="uk-margin">
-                    <ValidationProvider name="توضیحات" vid="description"
-                                        v-slot="{ errors }">
-                        <label
-                                class="uk-form-label"
-                                v-bind:class="{ 'uk-text-danger': (errors.length>0) }"
-                        >
-                            توضیحات
-                        </label>
-                        <textarea v-model="description"
-                                  class="uk-textarea"
-                                  v-bind:class="{ 'uk-form-danger': (errors.length>0) }"
-                                  rows="5"
-                                  placeholder="توضیحات"></textarea>
-                        <div v-if="errors.length>0">
-                            <div class="uk-text-danger" v-for="(error, index) in errors" :key="index">
-                                {{ error }}
-                            </div>
-                        </div>
-                    </ValidationProvider>
+                    </div>
                 </div>
                 <div class="uk-margin">
                     <button type="submit" class="uk-button uk-button-primary"

@@ -15,7 +15,7 @@ To create superuser run `docker-compose run app python manage.py createsuperuser
 Run the following command `docker-compose run app python manage.py collectstatic` once to publish static files.
 
 ## Translations
-Run the following command `docker-compose run app manage.py compilemessages -l fa_IR` for translations.
+Run the following command `docker-compose run app python manage.py compilemessages -l fa_IR` for translations.
 
 ## Run the Project for Development
 1. Run `docker-compose -f docker-compose.yml -f docker-compose.dev.yml up`.

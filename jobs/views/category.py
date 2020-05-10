@@ -21,5 +21,6 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['get'])
     def all(self, request):
-        serializer = CategoryListSerializer(self.queryset, many=True, context={'request': request})
+        all_categories = Category.objects.all().order_by('title')
+        serializer = CategoryListSerializer(all_categories, many=True, context={'request': request})
         return Response(serializer.data)

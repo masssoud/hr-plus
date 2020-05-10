@@ -24,7 +24,7 @@ class JobPostingViewSet(viewsets.ModelViewSet):
         if category is not None:
             queryset = queryset.filter(category=category)
         if is_open is not None:
-            queryset = queryset.filter(is_open=(int(is_open)==1))
+            queryset = queryset.filter(is_open=(int(is_open) == 1))
         return queryset
 
     def get_serializer_class(self):
@@ -35,5 +35,12 @@ class JobPostingViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['get'])
     def all(self, request):
-        serializer = JobPostingListSerializer(self.queryset, many=True, context={'request': request})
+        all_jobs = JobPosting.objects.all().order_by('title')
+        category = request.query_params.get('category', None)
+        is_open = request.query_params.get('is_open', None)
+        if category is not None:
+            all_jobs = all_jobs.filter(category=category)
+        if is_open is not None:
+            all_jobs = all_jobs.filter(is_open=(int(is_open) == 1))
+        serializer = JobPostingListSerializer(all_jobs, many=True, context={'request': request})
         return Response(serializer.data)

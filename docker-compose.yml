@@ -9,8 +9,8 @@ services:
       - 8000
     networks:
       - hrplus-network
-#    depends_on:
-#      - postgres
+    depends_on:
+      - postgres
 
   panel:
     image: node:12.16.2-alpine

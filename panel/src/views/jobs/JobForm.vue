@@ -87,11 +87,14 @@
                                 >
                                     توضیحات
                                 </label>
-                                <textarea v-model="description"
-                                          class="uk-textarea"
-                                          v-bind:class="{ 'uk-form-danger': (errors.length>0) }"
-                                          rows="5"
-                                          placeholder="توضیحات"></textarea>
+                                <ckeditor
+                                        :editor="editor"
+                                        v-model="description"
+                                        class="uk-textarea"
+                                        v-bind:class="{ 'uk-form-danger': (errors.length>0) }"
+                                        rows="5"
+                                        placeholder="توضیحات"
+                                        :config="editorConfig"></ckeditor>
                                 <div v-if="errors.length>0">
                                     <div class="uk-text-danger" v-for="(error, index) in errors" :key="index">
                                         {{ error }}
@@ -110,11 +113,14 @@
                                 >
                                     صلاحیت‌ها
                                 </label>
-                                <textarea v-model="qualifications"
-                                          class="uk-textarea"
-                                          v-bind:class="{ 'uk-form-danger': (errors.length>0) }"
-                                          rows="5"
-                                          placeholder="صلاحیت‌ها"></textarea>
+                                <ckeditor
+                                        :editor="editor"
+                                        v-model="qualifications"
+                                        class="uk-textarea"
+                                        v-bind:class="{ 'uk-form-danger': (errors.length>0) }"
+                                        rows="5"
+                                        placeholder="توضیحات"
+                                        :config="editorConfig"></ckeditor>
                                 <div v-if="errors.length>0">
                                     <div class="uk-text-danger" v-for="(error, index) in errors" :key="index">
                                         {{ error }}
@@ -133,11 +139,14 @@
                                 >
                                     موارد مورد نیاز
                                 </label>
-                                <textarea v-model="requirements"
-                                          class="uk-textarea"
-                                          v-bind:class="{ 'uk-form-danger': (errors.length>0) }"
-                                          rows="5"
-                                          placeholder="موارد مورد نیاز"></textarea>
+                                <ckeditor
+                                        :editor="editor"
+                                        v-model="requirements"
+                                        class="uk-textarea"
+                                        v-bind:class="{ 'uk-form-danger': (errors.length>0) }"
+                                        rows="5"
+                                        placeholder="توضیحات"
+                                        :config="editorConfig"></ckeditor>
                                 <div v-if="errors.length>0">
                                     <div class="uk-text-danger" v-for="(error, index) in errors" :key="index">
                                         {{ error }}
@@ -156,11 +165,14 @@
                                 >
                                     مواردی که داشتن آنها خوب است
                                 </label>
-                                <textarea v-model="good_to_have"
-                                          class="uk-textarea"
-                                          v-bind:class="{ 'uk-form-danger': (errors.length>0) }"
-                                          rows="5"
-                                          placeholder="مواردی که داشتن آنها خوب است"></textarea>
+                                <ckeditor
+                                        :editor="editor"
+                                        v-model="good_to_have"
+                                        class="uk-textarea"
+                                        v-bind:class="{ 'uk-form-danger': (errors.length>0) }"
+                                        rows="5"
+                                        placeholder="توضیحات"
+                                        :config="editorConfig"></ckeditor>
                                 <div v-if="errors.length>0">
                                     <div class="uk-text-danger" v-for="(error, index) in errors" :key="index">
                                         {{ error }}
@@ -179,11 +191,14 @@
                                 >
                                     مزایا
                                 </label>
-                                <textarea v-model="benefits"
-                                          class="uk-textarea"
-                                          v-bind:class="{ 'uk-form-danger': (errors.length>0) }"
-                                          rows="5"
-                                          placeholder="مزایا"></textarea>
+                                <ckeditor
+                                        :editor="editor"
+                                        v-model="benefits"
+                                        class="uk-textarea"
+                                        v-bind:class="{ 'uk-form-danger': (errors.length>0) }"
+                                        rows="5"
+                                        placeholder="توضیحات"
+                                        :config="editorConfig"></ckeditor>
                                 <div v-if="errors.length>0">
                                     <div class="uk-text-danger" v-for="(error, index) in errors" :key="index">
                                         {{ error }}
@@ -207,6 +222,7 @@
     import {extend} from 'vee-validate';
     import UIKit from 'uikit';
     import AXIOS from '../../common/http-common';
+    import ClassicEditor from 'ckeditor-custom-build';
 
     extend('required', {
         validate(value) {
@@ -223,6 +239,37 @@
         props: ['info', 'onSubmit'],
         data: function () {
             return {
+                editor: ClassicEditor,
+                editorConfig: {
+                    language: 'fa',
+                    toolbar: {
+                        items: [
+                            'heading',
+                            '|',
+                            'bold',
+                            'italic',
+                            'link',
+                            'bulletedList',
+                            'numberedList',
+                            '|',
+                            'indent',
+                            'outdent',
+                            '|',
+                            'blockQuote',
+                            'insertTable',
+                            'alignment',
+                            'undo',
+                            'redo'
+                        ]
+                    },
+                    table: {
+                        contentToolbar: [
+                            'tableColumn',
+                            'tableRow',
+                            'mergeTableCells'
+                        ]
+                    },
+                },
                 title: this.info.title ?? '',
                 description: this.info.description ?? '',
                 is_open: (this.info.is_open) ? '1' : '0',

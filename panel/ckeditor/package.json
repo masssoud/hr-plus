@@ -1,0 +1,11 @@
+{
+  "name": "ckeditor-custom-build",
+  "version": "1.0.0",
+  "description": "CKEditor Custom Build with Alignment",
+  "main": "ckeditor.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

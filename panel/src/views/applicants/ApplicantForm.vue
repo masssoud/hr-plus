@@ -181,7 +181,7 @@
                             </ValidationProvider>
                         </div>
                     </div>
-                    <div class="uk-width-1-2@m uk-grid-item-match ">
+                    <div class="uk-width-1-1@m uk-grid-item-match ">
                         <div class="uk-margin">
                             <ValidationProvider name="توضیحات" vid="description"
                                                 v-slot="{ errors }">
@@ -191,11 +191,14 @@
                                 >
                                     توضیحات
                                 </label>
-                                <textarea v-model="description"
-                                          class="uk-textarea"
-                                          v-bind:class="{ 'uk-form-danger': (errors.length>0) }"
-                                          rows="5"
-                                          placeholder="توضیحات"></textarea>
+                                <ckeditor
+                                        :editor="editor"
+                                        v-model="description"
+                                        class="uk-textarea"
+                                        v-bind:class="{ 'uk-form-danger': (errors.length>0) }"
+                                        rows="5"
+                                        placeholder="توضیحات"
+                                        :config="editorConfig"></ckeditor>
                                 <div v-if="errors.length>0">
                                     <div class="uk-text-danger" v-for="(error, index) in errors" :key="index">
                                         {{ error }}
@@ -226,6 +229,7 @@
     import UIKit from 'uikit';
     import {mapState} from 'vuex';
     import AXIOS from '../../common/http-common';
+    import ClassicEditor from 'ckeditor-custom-build';
 
     extend('required', {
         validate(value) {
@@ -242,6 +246,37 @@
         props: ['info', 'onSubmit'],
         data: function () {
             return {
+                editor: ClassicEditor,
+                editorConfig: {
+                    language: 'fa',
+                    toolbar: {
+                        items: [
+                            'heading',
+                            '|',
+                            'bold',
+                            'italic',
+                            'link',
+                            'bulletedList',
+                            'numberedList',
+                            '|',
+                            'indent',
+                            'outdent',
+                            '|',
+                            'blockQuote',
+                            'insertTable',
+                            'alignment',
+                            'undo',
+                            'redo'
+                        ]
+                    },
+                    table: {
+                        contentToolbar: [
+                            'tableColumn',
+                            'tableRow',
+                            'mergeTableCells'
+                        ]
+                    },
+                },
                 id: this.info.id ?? '',
                 cv: this.info.cv ?? null,
                 cvData: null,

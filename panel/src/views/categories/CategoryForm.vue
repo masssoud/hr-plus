@@ -37,11 +37,14 @@
                                 >
                                     توضیحات
                                 </label>
-                                <textarea v-model="description"
-                                          class="uk-textarea"
-                                          v-bind:class="{ 'uk-form-danger': (errors.length>0) }"
-                                          rows="5"
-                                          placeholder="توضیحات"></textarea>
+                                <ckeditor
+                                        :editor="editor"
+                                        v-model="description"
+                                        class="uk-textarea"
+                                        v-bind:class="{ 'uk-form-danger': (errors.length>0) }"
+                                        rows="5"
+                                        placeholder="توضیحات"
+                                        :config="editorConfig"></ckeditor>
                                 <div v-if="errors.length>0">
                                     <div class="uk-text-danger" v-for="(error, index) in errors" :key="index">
                                         {{ error }}
@@ -64,6 +67,7 @@
 <script>
     import {extend} from 'vee-validate';
     import UIKit from 'uikit';
+    import ClassicEditor from 'ckeditor-custom-build';
 
     extend('required', {
         validate(value) {
@@ -80,6 +84,37 @@
         props: ['info', 'onSubmit'],
         data: function () {
             return {
+                editor: ClassicEditor,
+                editorConfig: {
+                    language: 'fa',
+                    toolbar: {
+                        items: [
+                            'heading',
+                            '|',
+                            'bold',
+                            'italic',
+                            'link',
+                            'bulletedList',
+                            'numberedList',
+                            '|',
+                            'indent',
+                            'outdent',
+                            '|',
+                            'blockQuote',
+                            'insertTable',
+                            'alignment',
+                            'undo',
+                            'redo'
+                        ]
+                    },
+                    table: {
+                        contentToolbar: [
+                            'tableColumn',
+                            'tableRow',
+                            'mergeTableCells'
+                        ]
+                    },
+                },
                 title: this.info.title ?? '',
                 description: this.info.description ?? '',
             }

@@ -229,7 +229,7 @@
     import UIKit from 'uikit';
     import {mapState} from 'vuex';
     import AXIOS from '../../common/http-common';
-    import ClassicEditor from 'ckeditor-custom-build';
+    import ClassicEditor from 'hd-my-ckeditor-custom-build';
 
     extend('required', {
         validate(value) {

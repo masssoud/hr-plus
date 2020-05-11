@@ -67,7 +67,7 @@
 <script>
     import {extend} from 'vee-validate';
     import UIKit from 'uikit';
-    import ClassicEditor from 'ckeditor-custom-build';
+    import ClassicEditor from 'hd-my-ckeditor-custom-build';
 
     extend('required', {
         validate(value) {

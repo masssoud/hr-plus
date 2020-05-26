@@ -16,7 +16,7 @@ class UserViewSet(viewsets.ModelViewSet):
     def get_serializer_class(self):
         if self.action == 'list':
             return UserListSerializer
-        elif self.action == 'create' or self.action == 'update' or self.action == 'partial_update':
+        elif self.action == 'create' or self.action('updatePassword') or self.action == 'update' or self.action == 'partial_update':
             return CreateUpdateUserSerializer
         elif self.action == 'current_user':
             return UserDetailSerializer
@@ -28,3 +28,13 @@ class UserViewSet(viewsets.ModelViewSet):
         user = request.user
         serializer = self.get_serializer(user, many=False)
         return Response(serializer.data)
+
+
+    @action(detail=False, methods=['post'], url_path='change-password',
+            permission_classes=[permissions.IsAuthenticated])
+    def updatePassword(self, request):
+        if request.POST.get('password') == request.POST.get('confirmPassword'):
+            CreateUpdateUserSerializer.updatePassword(self, request.POST.get('password'), request.user)
+            return Response('Password successfully changed.', status=200)
+        else:
+            return Response('Unprocessable data.', status=422)

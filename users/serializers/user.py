@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 from rest_framework import serializers
 from django.utils.translation import gettext_lazy as _
 from rest_framework.validators import UniqueValidator
+from rest_framework.response import Response
 
 
 class UserDetailSerializer(serializers.ModelSerializer):
@@ -58,6 +59,11 @@ class CreateUpdateUserSerializer(serializers.ModelSerializer):
         user = super(CreateUpdateUserSerializer, self).update(instance, validated_data)
         if 'password' in validated_data:
             user.set_password(validated_data['password'])
+        user.save()
+        return user
+
+    def updatePassword(self, data, user):
+        user.set_password(data)
         user.save()
         return user
 
